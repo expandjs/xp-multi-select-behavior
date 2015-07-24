@@ -1,0 +1,108 @@
+<!--
+@license
+Copyright (c) 2015 The ExpandJS authors. All rights reserved.
+This code may only be used under the BSD style license found at https://expandjs.github.io/LICENSE.txt
+The complete set of authors may be found at https://expandjs.github.io/AUTHORS.txt
+The complete set of contributors may be found at https://expandjs.github.io/CONTRIBUTORS.txt
+-->
+
+<!--
+This behavior is used to add multi selection capabilities on the context element.
+
+@behavior xp-multi-select-behavior
+@description A behavior used to add multi selection capabilities on the context element
+@keywords web app, html5, expandjs, web-components
+@group behaviors
+@homepage http://expandjs.com/elements/xp-multi-select-behavior
+
+@behavior xp-selected-behavior /bower_components/xp-selected-behavior/xp-selected-behavior.html
+
+@dependency polymer Polymer/polymer#^1.0.0
+@dependency expandjs ExpandJS/expandjs#0.9.5
+@dependency xp-selected-behavior ExpandJS/xp-selected-behavior#0.9.5
+-->
+
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../expandjs/expandjs.html">
+<link rel="import" href="../xp-selected-behavior/xp-selected-behavior.html">
+
+<script>
+    Polymer.XPMultiSelectBehaviorImp = {
+
+        /**
+         * Selects all items.
+         *
+         * @method selectAll
+         * @param {Function} [predicate]
+         * @returns {Array}
+         */
+        selectAll: function (predicate) {
+            var self = this, items = self.multi ? self.findItems(predicate) : [];
+            return XP.map(items, function (item) { return self.select(item, true); });
+        },
+
+        /**
+         * Toggles active state on all items.
+         *
+         * @method switchAll
+         * @param {Function} [predicate]
+         * @param {boolean} [force = false]
+         * @returns {Array}
+         */
+        switchAll: function (predicate, force) {
+            var self = this, items = self.multi ? self.findItems(predicate) : [];
+            return XP.map(items, function (item) { return self.switch(item, force, true); });
+        },
+
+        /**
+         * Unselects all items.
+         *
+         * @method unselectAll
+         * @param {Function} [predicate]
+         * @param {boolean} [force = false]
+         * @returns {Array}
+         */
+        unselectAll: function (predicate, force) {
+            var self = this, items = self.multi ? self.findItems(predicate) : [];
+            return XP.map(items, function (item) { return self.unselect(item, force, true); });
+        },
+        
+        /*********************************************************************/
+        
+        // PROPERTIES
+        properties: {
+
+            /**
+             * If set to true, multi selection is allowed.
+             *
+             * @attribute multi
+             * @type boolean
+             * @default false
+             */
+            multi: {
+                observer: '_multiChanged',
+                reflectToAttribute: true,
+                type: Boolean,
+                value: false
+            }
+        },
+        
+        /*********************************************************************/
+
+        // OBSERVER
+        _multiChanged: function (post) {
+
+            // Vars
+            var self = this;
+
+            // Setting
+            self._setSelection(post ? XP.toArray(self.selection, true) : (XP.isArray(self.selection) ? null : self.selection));
+            self.selected = post ? XP.toArray(self.selected, true) : (XP.isArray(self.selected) ? null : self.selected);
+        }
+    };
+
+    Polymer.XPMultiSelectBehavior = [
+        Polymer.XPSelectedBehavior,
+        Polymer.XPMultiSelectBehaviorImp
+    ];
+</script>
