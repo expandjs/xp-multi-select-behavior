@@ -19,8 +19,8 @@ This behavior is used to add multi selection capabilities on the context element
 @behavior xp-selected-behavior /bower_components/xp-selected-behavior/xp-selected-behavior.html
 
 @dependency polymer Polymer/polymer#^1.0.0
-@dependency expandjs ExpandJS/expandjs#0.9.5
-@dependency xp-selected-behavior ExpandJS/xp-selected-behavior#0.9.5
+@dependency expandjs ExpandJS/expandjs#0.9.6
+@dependency xp-selected-behavior ExpandJS/xp-selected-behavior#0.9.6
 -->
 
 <link rel="import" href="../polymer/polymer.html">
@@ -43,19 +43,6 @@ This behavior is used to add multi selection capabilities on the context element
         },
 
         /**
-         * Toggles active state on all items.
-         *
-         * @method switchAll
-         * @param {Function} [predicate]
-         * @param {boolean} [force = false]
-         * @returns {Array}
-         */
-        switchAll: function (predicate, force) {
-            var self = this, items = self.multi ? self.findItems(predicate) : [];
-            return XP.map(items, function (item) { return self.switch(item, force, true); });
-        },
-
-        /**
          * Unselects all items.
          *
          * @method unselectAll
@@ -64,7 +51,7 @@ This behavior is used to add multi selection capabilities on the context element
          * @returns {Array}
          */
         unselectAll: function (predicate, force) {
-            var self = this, items = self.multi ? self.findItems(predicate) : [];
+            var self = this, items = self.findItems(predicate);
             return XP.map(items, function (item) { return self.unselect(item, force, true); });
         },
         
