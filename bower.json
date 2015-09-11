@@ -1,7 +1,7 @@
 {
   "name": "xp-multi-select-behavior",
   "license": "BSD-3-Clause",
-  "version": "0.9.8",
+  "version": "0.9.9",
   "main": "xp-multi-select-behavior.html",
   "description": "A behavior used to add multi selection capabilities on the context element",
   "homepage": "http://expandjs.com/elements/xp-multi-select-behavior",
@@ -20,8 +20,8 @@
     "**/.*"
   ],
   "dependencies": {
-    "expandjs": "ExpandJS/expandjs#0.9.8",
-    "xp-selected-behavior": "ExpandJS/xp-selected-behavior#0.9.8",
+    "expandjs": "ExpandJS/expandjs#0.9.9",
+    "xp-selected-behavior": "ExpandJS/xp-selected-behavior#0.9.9",
     "polymer": "Polymer/polymer#^1.1.0"
   }
 }
